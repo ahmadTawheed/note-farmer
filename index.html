@@ -589,7 +589,7 @@
 <body>
     <!-- Header -->
     <div class="app-header">
-        <h1 style="font-family: 'Cairo', sans-serif !important;"><i class="fas fa-seedling"></i> Thamra Tech </h1>
+        <h1 style="font-family: 'Cairo', sans-serif !important;"><i class="fas fa-seedling"></i> Thamra Tech</h1>
         <div id="welcomeMessage" class="welcome-message" style="display: none;">
             <i class="fas fa-user"></i> <span id="welcomeText"></span>
         </div>
@@ -686,7 +686,7 @@
         <!-- Prescription Page -->
         <div id="prescriptionPage" style="display: none;">
             <div class="form-container">
-                <h3><i class="fas fa-file-prescription"></i> إنشاء روشتة جديدة</h3>
+                <h3 style="font-family: Cairo;"><i class="fas fa-file-prescription"></i> إنشاء روشتة جديدة</h3>
                 <p style="color: #666; margin-bottom: 20px;">
                     <i class="fas fa-info-circle"></i> هذه الخدمة مخصصة للمهندسين الزراعيين المعتمدين
                 </p>
@@ -697,7 +697,7 @@
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-phone"></i> رقم واتساب المهندس *</label>
-                        <input type="tel" id="engineerPhone" required pattern="[0-9]{11}" title="الرجاء إدخال رقم هاتف صحيح">
+                        <input dir="rtl" placeholder="الرجاء كتابة كود الدولة مثال : 20XXXXXXXXXX " type="tel" id="engineerPhone" required title="الرجاء إدخال رقم هاتف صحيح">
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-user"></i> اسم العميل *</label>
@@ -705,7 +705,7 @@
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-phone-alt"></i> رقم العميل *</label>
-                        <input placeholder="201501021670" type="tel" id="clientPhone" required pattern="[0-9]{12}" title="الرجاء إدخال رقم هاتف صحيح">
+                        <input dir="rtl" placeholder="الرجاء كتابة كود الدولة مثال : 20XXXXXXXXXX " type="tel" id="clientPhone" required title="الرجاء إدخال رقم هاتف صحيح">
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-dollar-sign"></i> سعر الاستشارة *</label>
@@ -956,7 +956,7 @@
         
         function showEditUserName() {
             const form = `
-                <h3><i class="fas fa-user-edit"></i> تعديل اسم المستخدم</h3>
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-user-edit"></i> تعديل اسم المستخدم</h3>
                 <form id="editUserNameForm">
                     <div class="form-group">
                         <label>الاسم الجديد</label>
@@ -1231,7 +1231,7 @@
         
         function showAddPesticideForm() {
             const form = `
-                <h3><i class="fas fa-spray-can"></i> إضافة مبيد جديد</h3>
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-spray-can"></i> إضافة مبيد جديد</h3>
                 <form id="pesticideForm">
                     <div class="form-group">
                         <label><i class="fas fa-tag"></i> اسم المبيد *</label>
@@ -1333,7 +1333,7 @@
             if (!pesticide) return;
             
             const form = `
-                <h3><i class="fas fa-edit"></i> تعديل مبيد</h3>
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-edit"></i> تعديل مبيد</h3>
                 <form id="editPesticideForm">
                     <div class="form-group">
                         <label><i class="fas fa-tag"></i> اسم المبيد *</label>
@@ -1549,7 +1549,7 @@ ${pesticide.notes ? `ملاحظات: ${pesticide.notes}` : ''}
         
         function showAddDiseaseForm() {
             const form = `
-                <h3><i class="fas fa-virus"></i> إضافة مرض جديد</h3>
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-virus"></i> إضافة مرض جديد</h3>
                 <form id="diseaseForm">
                     <div class="form-group">
                         <label><i class="fas fa-tag"></i> اسم المرض *</label>
@@ -1685,7 +1685,7 @@ ${pesticide.notes ? `ملاحظات: ${pesticide.notes}` : ''}
             const isOtherCause = !['فطري', 'بكتيري', 'فيروسي'].includes(disease.cause);
             
             const form = `
-                <h3><i class="fas fa-edit"></i> تعديل مرض</h3>
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-edit"></i> تعديل مرض</h3>
                 <form id="editDiseaseForm">
                     <div class="form-group">
                         <label><i class="fas fa-tag"></i> اسم المرض *</label>
@@ -1934,7 +1934,7 @@ ${disease.notes ? `ملاحظات: ${disease.notes}` : ''}
         
         function showAddPestForm() {
             const form = `
-                <h3><i class="fas fa-bug"></i> إضافة آفة جديدة</h3>
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-bug"></i> إضافة آفة جديدة</h3>
                 <form id="pestForm">
                     <div class="form-group">
                         <label><i class="fas fa-tag"></i> اسم الآفة *</label>
@@ -2033,7 +2033,7 @@ ${disease.notes ? `ملاحظات: ${disease.notes}` : ''}
             if (!pest) return;
             
             const form = `
-                <h3><i class="fas fa-edit"></i> تعديل آفة</h3>
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-edit"></i> تعديل آفة</h3>
                 <form id="editPestForm">
                     <div class="form-group">
                         <label><i class="fas fa-tag"></i> اسم الآفة *</label>
@@ -2246,7 +2246,7 @@ ${pest.notes ? `ملاحظات: ${pest.notes}` : ''}
         
         function showAddPlantForm() {
             const form = `
-                <h3><i class="fas fa-leaf"></i> إضافة نبات جديد</h3>
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-leaf"></i> إضافة نبات جديد</h3>
                 <form id="plantForm">
                     <div class="form-group">
                         <label><i class="fas fa-tag"></i> اسم النبات *</label>
@@ -2340,7 +2340,7 @@ ${pest.notes ? `ملاحظات: ${pest.notes}` : ''}
             if (!plant) return;
             
             const form = `
-                <h3><i class="fas fa-edit"></i> تعديل نبات</h3>
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-edit"></i> تعديل نبات</h3>
                 <form id="editPlantForm">
                     <div class="form-group">
                         <label><i class="fas fa-tag"></i> اسم النبات *</label>
@@ -2556,7 +2556,7 @@ ${plant.notes ? `ملاحظات: ${plant.notes}` : ''}
             if (!prescription) return;
             
             const form = `
-                <h3><i class="fas fa-edit"></i> تعديل روشتة</h3>
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-edit"></i> تعديل روشتة</h3>
                 <form id="editPrescriptionForm">
                     <div class="form-group">
                         <label><i class="fas fa-user-tie"></i> اسم المهندس *</label>
@@ -2632,7 +2632,7 @@ ${plant.notes ? `ملاحظات: ${plant.notes}` : ''}
             if (!prescription) return;
             
             const text = `
- | Thamra Tech | روشتة |
+روشتة زراعية
 
 المهندس: ${prescription.engineerName}
 العميل: ${prescription.clientName}
@@ -2699,7 +2699,7 @@ ${prescription.content}
             const content = document.getElementById('prescriptionContent').value;
             
             const prescriptionText = `
-            | Thamra Tech | روشتة |
+روشتة زراعية
 
 المهندس: ${engineerName}
 العميل: ${clientName}
@@ -2726,7 +2726,7 @@ ${content}
             const content = document.getElementById('prescriptionContent').value;
             
             const message = `
-| Thamra Tech | روشتة |
+روشتة زراعية
 
 المهندس: ${engineerName}
 العميل: ${clientName}
@@ -2933,4 +2933,3 @@ ${content}
     </script>
 </body>
 </html>
-
