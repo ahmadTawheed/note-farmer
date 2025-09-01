@@ -705,7 +705,7 @@
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-phone-alt"></i> رقم العميل *</label>
-                        <input type="tel" id="clientPhone" required pattern="[0-9]{11}" title="الرجاء إدخال رقم هاتف صحيح">
+                        <input placeholder="201501021670" type="tel" id="clientPhone" required pattern="[0-9]{12}" title="الرجاء إدخال رقم هاتف صحيح">
                     </div>
                     <div class="form-group">
                         <label><i class="fas fa-dollar-sign"></i> سعر الاستشارة *</label>
@@ -2632,7 +2632,7 @@ ${plant.notes ? `ملاحظات: ${plant.notes}` : ''}
             if (!prescription) return;
             
             const text = `
-روشتة زراعية
+ | Thamra Tech | روشتة |
 
 المهندس: ${prescription.engineerName}
 العميل: ${prescription.clientName}
@@ -2699,7 +2699,7 @@ ${prescription.content}
             const content = document.getElementById('prescriptionContent').value;
             
             const prescriptionText = `
-روشتة زراعية
+            | Thamra Tech | روشتة |
 
 المهندس: ${engineerName}
 العميل: ${clientName}
@@ -2726,7 +2726,7 @@ ${content}
             const content = document.getElementById('prescriptionContent').value;
             
             const message = `
-روشتة زراعية
+| Thamra Tech | روشتة |
 
 المهندس: ${engineerName}
 العميل: ${clientName}
@@ -2933,3 +2933,4 @@ ${content}
     </script>
 </body>
 </html>
+
