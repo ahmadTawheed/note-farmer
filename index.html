@@ -1,0 +1,2895 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thamra Tech</title>
+    
+    <!-- Material Design Lite -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-green.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Toastify CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo';
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif !important;
+            background: #f5f5f5;
+            padding-bottom: 70px;
+        }
+        
+        /* Header Styles */
+        .app-header {
+            background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .app-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .welcome-message {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 10px;
+            display: inline-block;
+            font-size: 16px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        /* Section Cards */
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2e7d32, #4caf50);
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .section-card i {
+            font-size: 48px;
+            color: #4caf50;
+            margin-bottom: 10px;
+        }
+        
+        .section-card h3 {
+            font-size: 16px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        /* Form Styles */
+        .form-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-group input:invalid,
+        .form-group select:invalid,
+        .form-group textarea:invalid {
+            border-color: #f44336;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            position: sticky;
+            top: 80px;
+            background: white;
+            padding: 15px;
+            margin: -20px -20px 20px -20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 50;
+        }
+        
+        .search-bar {
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+        
+        .search-bar i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+        
+        /* Data Cards */
+        .data-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .data-card:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .data-card h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .data-card p {
+            color: #666;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .data-card .type-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .data-card .actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .data-card .actions button {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .data-card .actions button:hover {
+            background: #f5f5f5;
+            color: #4caf50;
+        }
+        
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            width: 56px;
+            height: 56px;
+            background: #4caf50;
+            color: white;
+            border-radius: 50%;
+            border: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            z-index: 90;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1);
+            background: #2e7d32;
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 100;
+        }
+        
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #999;
+        }
+        
+        .nav-item.active {
+            color: #4caf50;
+        }
+        
+        .nav-item i {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 20px;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .modal-close:hover {
+            color: #333;
+        }
+        
+        /* Button Styles */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        
+        .btn-primary {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2e7d32;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #757575;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #616161;
+        }
+        
+        .btn-success {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .btn-info {
+            background: #2196f3;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #f44336;
+            color: white;
+        }
+        
+        /* Image Preview */
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .image-preview img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .image-preview img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Settings Page */
+        .settings-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .settings-section h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+        
+        .setting-item label {
+            color: #555;
+            font-weight: 500;
+        }
+        
+        /* Toast Customization */
+        .toastify {
+            font-family: 'Cairo', sans-serif !important;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-content {
+                margin: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4caf50;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .empty-state i {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+        
+        .empty-state p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        /* User Registration Modal */
+        .user-registration {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .user-registration h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        
+        .user-registration p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        /* Engineer Badge */
+        .engineer-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        /* Prescription List */
+        .prescription-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .prescription-item h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        
+        .prescription-item .prescription-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .prescription-item .prescription-content {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="app-header">
+        <h1 style="font-family: 'Cairo', sans-serif !important;"><i class="fas fa-seedling"></i> Thamra Tech</h1>
+        <div id="welcomeMessage" class="welcome-message" style="display: none;">
+            <i class="fas fa-user"></i> <span id="welcomeText"></span>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Home Page Content -->
+        <div id="homePage">
+            <div class="section-grid">
+                <div class="section-card" onclick="showSection('pesticides')">
+                    <i class="fas fa-spray-can"></i>
+                    <h3 style="font-family: 'Cairo', sans-serif;">المبيدات</h3>
+                </div>
+                <div class="section-card" onclick="showSection('diseases')">
+                    <i class="fas fa-virus"></i>
+                    <h3 style="font-family: 'Cairo', sans-serif;">الأمراض</h3>
+                </div>
+                <div class="section-card" onclick="showSection('pests')">
+                    <i class="fas fa-bug"></i>
+                    <h3 style="font-family: 'Cairo', sans-serif;">الآفات</h3>
+                </div>
+                <div class="section-card" onclick="showSection('plants')">
+                    <i class="fas fa-leaf"></i>
+                    <h3 style="font-family: 'Cairo', sans-serif;">النباتات</h3>
+                </div>
+                <div class="section-card" onclick="showSection('prescriptions')">
+                    <i class="fas fa-file-prescription"></i>
+                    <h3 style="font-family: 'Cairo', sans-serif;">الروشتات</h3>
+                </div>
+                <div class="section-card" onclick="showSection('prescription')">
+                    <i class="fas fa-plus-circle"></i>
+                    <h3 style="font-family: 'Cairo', sans-serif;">روشتة جديدة</h3>
+                    <div class="engineer-badge">للمهندسين</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pesticides Page -->
+        <div id="pesticidesPage" style="display: none;">
+            <div class="search-container">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="pesticideSearch" placeholder="ابحث بالمبيد أو المادة الفعالة..." onkeyup="searchPesticides()">
+                </div>
+            </div>
+            <div id="pesticidesList"></div>
+        </div>
+        
+        <!-- Diseases Page -->
+        <div id="diseasesPage" style="display: none;">
+            <div class="search-container">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="diseaseSearch" placeholder="ابحث بالمرض..." onkeyup="searchDiseases()">
+                </div>
+            </div>
+            <div id="diseasesList"></div>
+        </div>
+        
+        <!-- Pests Page -->
+        <div id="pestsPage" style="display: none;">
+            <div class="search-container">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="pestSearch" placeholder="ابحث بالآفة..." onkeyup="searchPests()">
+                </div>
+            </div>
+            <div id="pestsList"></div>
+        </div>
+        
+        <!-- Plants Page -->
+        <div id="plantsPage" style="display: none;">
+            <div class="search-container">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="plantSearch" placeholder="ابحث بالنبات..." onkeyup="searchPlants()">
+                </div>
+            </div>
+            <div id="plantsList"></div>
+        </div>
+        
+        <!-- Prescriptions List Page -->
+        <div id="prescriptionsPage" style="display: none;">
+            <div class="search-container">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="prescriptionSearch" placeholder="ابحث بالعميل أو المهندس..." onkeyup="searchPrescriptions()">
+                </div>
+            </div>
+            <div id="prescriptionsList"></div>
+        </div>
+        
+        <!-- Prescription Page -->
+        <div id="prescriptionPage" style="display: none;">
+            <div class="form-container">
+                <h3><i class="fas fa-file-prescription"></i> إنشاء روشتة جديدة</h3>
+                <p style="color: #666; margin-bottom: 20px;">
+                    <i class="fas fa-info-circle"></i> هذه الخدمة مخصصة للمهندسين الزراعيين المعتمدين
+                </p>
+                <form id="prescriptionForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-user-tie"></i> اسم المهندس *</label>
+                        <input type="text" id="engineerName" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> رقم واتساب المهندس *</label>
+                        <input type="tel" id="engineerPhone" required pattern="[0-9]{11}" title="الرجاء إدخال رقم هاتف صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> اسم العميل *</label>
+                        <input type="text" id="clientName" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone-alt"></i> رقم العميل *</label>
+                        <input type="tel" id="clientPhone" required pattern="[0-9]{11}" title="الرجاء إدخال رقم هاتف صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-dollar-sign"></i> سعر الاستشارة *</label>
+                        <input type="number" id="consultationPrice" required min="0" step="0.01" title="الرجاء إدخال سعر صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar"></i> التاريخ والوقت *</label>
+                        <input type="datetime-local" id="prescriptionDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-file-alt"></i> محتوى الروشتة *</label>
+                        <textarea id="prescriptionContent" rows="10" required minlength="10" title="الرجاء إدخال محتوى الروشتة"></textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ الروشتة
+                        </button>
+                        <button type="button" class="btn btn-info" onclick="copyPrescription()">
+                            <i class="fas fa-copy"></i> نسخ الروشتة
+                        </button>
+                        <button type="button" class="btn btn-success" onclick="sendWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> إرسال واتساب
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Settings Page -->
+        <div id="settingsPage" style="display: none;">
+            <div class="settings-section">
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-user"></i> معلومات المستخدم</h3>
+                <div class="setting-item">
+                    <label>اسم المستخدم</label>
+                    <div>
+                        <span id="currentUserName">${localStorage.getItem('userName') || 'غير محدد'}</span>
+                        <button class="btn btn-primary" onclick="showEditUserName()" style="margin-right: 10px;">
+                            <i class="fas fa-edit"></i> تعديل
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-language"></i> اللغة</h3>
+                <div class="setting-item">
+                    <label>اختر اللغة</label>
+                    <select onchange="changeLanguage(this.value)">
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-database"></i> إدارة البيانات</h3>
+                <div class="setting-item">
+                    <label>تقييم التطبيق</label>
+                    <a href="#">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-start"></i> تقييم
+                        </button>
+                    </a>
+                </div>
+                <!-- <div class="setting-item">
+                    <label>استعادة البيانات</label>
+                    <input type="file" id="restoreFile" style="display: none;" onchange="restoreData(event)">
+                    <button class="btn btn-secondary" onclick="document.getElementById('restoreFile').click()">
+                        <i class="fas fa-upload"></i> استعادة
+                    </button>
+                </div> -->
+                <div class="setting-item">
+                    <label>مسح جميع البيانات</label>
+                    <button class="btn btn-danger" onclick="clearAllData()">
+                        <i class="fas fa-trash"></i> مسح
+                    </button>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-info-circle"></i> معلومات التطبيق</h3>
+                <p style="color: #666; line-height: 1.8;">
+                    <strong>Thamra Tech</strong><br>
+                    الإصدار: 1.0.0<br>
+                    نظام إدارة متكامل للمزارع<br>
+                    تطوير: Ahmed Tawheed<br>
+                    © 2025 Thamra Tech
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Floating Action Button -->
+    <button class="fab" id="fabButton" onclick="showAddForm()" style="display: none;">
+        <i class="fas fa-plus"></i>
+    </button>
+    
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="navigateTo('home')">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('prescriptions')">
+            <i class="fas fa-file-prescription"></i>
+            <span>الروشتات</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('settings')">
+            <i class="fas fa-cog"></i>
+            <span>الإعدادات</span>
+        </div>
+    </div>
+    
+    <!-- Modal for Forms -->
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+    
+    <!-- User Registration Modal -->
+    <div id="userRegistrationModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="user-registration">
+                <h2 style="font-family: 'Cairo', sans-serif;"><i class="fas fa-user-plus"></i> مرحباً بك</h2>
+                <p>يرجى تسجيل اسمك للاستفادة من جميع خدمات التطبيق</p>
+                <form id="userRegistrationForm">
+                    <div class="form-group">
+                        <input type="text" id="userNameInput" placeholder="ادخل اسمك الكامل" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> تسجيل
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    
+    <script>
+        // Global Variables
+        let currentSection = 'home';
+        let currentData = [];
+        
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is registered
+            const userName = localStorage.getItem('userName');
+            if (!userName) {
+                showUserRegistration();
+            } else {
+                showWelcomeMessage(userName);
+            }
+            
+            // Set default date for prescription
+            const prescriptionDate = document.getElementById('prescriptionDate');
+            if (prescriptionDate) {
+                prescriptionDate.value = new Date().toISOString().slice(0, 16);
+            }
+            
+            // Load data from localStorage
+            loadData();
+            
+            // Setup form handlers
+            setupFormHandlers();
+        });
+        
+        // User Registration Functions
+        function showUserRegistration() {
+            const modal = document.getElementById('userRegistrationModal');
+            modal.style.display = 'block';
+            
+            // Set up the form handler if not already set
+            const form = document.getElementById('userRegistrationForm');
+            if (form && !form.hasAttribute('data-handler-set')) {
+                form.onsubmit = function(e) {
+                    e.preventDefault();
+                    const userName = document.getElementById('userNameInput').value.trim();
+                    if (userName) {
+                        localStorage.setItem('userName', userName);
+                        showWelcomeMessage(userName);
+                        modal.style.display = 'none';
+                        showToast('مرحباً بك في الزراعة الذكية', 'success');
+                    }
+                };
+                form.setAttribute('data-handler-set', 'true');
+            }
+        }
+        
+        function showWelcomeMessage(userName) {
+            const welcomeDiv = document.getElementById('welcomeMessage');
+            const welcomeText = document.getElementById('welcomeText');
+            if (welcomeDiv && welcomeText) {
+                welcomeText.textContent = `مرحباً ${userName}`;
+                welcomeDiv.style.display = 'inline-block';
+            }
+            
+            // Update settings page
+            const currentUserName = document.getElementById('currentUserName');
+            if (currentUserName) {
+                currentUserName.textContent = userName;
+            }
+        }
+        
+        function showEditUserName() {
+            const form = `
+                <h3><i class="fas fa-user-edit"></i> تعديل اسم المستخدم</h3>
+                <form id="editUserNameForm">
+                    <div class="form-group">
+                        <label>الاسم الجديد</label>
+                        <input type="text" id="newUserName" value="${localStorage.getItem('userName') || ''}" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = form;
+                document.getElementById('formModal').style.display = 'block';
+                
+                const editForm = document.getElementById('editUserNameForm');
+                if (editForm) {
+                    editForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        const newUserName = document.getElementById('newUserName').value.trim();
+                        if (newUserName) {
+                            localStorage.setItem('userName', newUserName);
+                            showWelcomeMessage(newUserName);
+                            closeModal();
+                            showToast('تم تحديث اسم المستخدم بنجاح', 'success');
+                        }
+                    };
+                }
+            }
+        }
+        
+        // Navigation Functions
+        function navigateTo(page) {
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+            
+            // Hide all pages
+            const pages = ['homePage', 'pesticidesPage', 'diseasesPage', 'pestsPage', 'plantsPage', 'prescriptionPage', 'prescriptionsPage', 'settingsPage'];
+            pages.forEach(pageId => {
+                const pageElement = document.getElementById(pageId);
+                if (pageElement) {
+                    pageElement.style.display = 'none';
+                }
+            });
+            
+            // Hide FAB
+            const fabButton = document.getElementById('fabButton');
+            if (fabButton) {
+                fabButton.style.display = 'none';
+            }
+            
+            // Show selected page
+            switch(page) {
+                case 'home':
+                    const homePage = document.getElementById('homePage');
+                    if (homePage) homePage.style.display = 'block';
+                    currentSection = 'home';
+                    break;
+                case 'prescriptions':
+                    const prescriptionsPage = document.getElementById('prescriptionsPage');
+                    if (prescriptionsPage) {
+                        prescriptionsPage.style.display = 'block';
+                        currentSection = 'prescriptions';
+                        displayPrescriptions();
+                        if (fabButton) fabButton.style.display = 'block';
+                    }
+                    break;
+                case 'settings':
+                    const settingsPage = document.getElementById('settingsPage');
+                    if (settingsPage) settingsPage.style.display = 'block';
+                    currentSection = 'settings';
+                    break;
+            }
+        }
+        
+        function showSection(section) {
+            // Hide home page
+            const homePage = document.getElementById('homePage');
+            if (homePage) homePage.style.display = 'none';
+            
+            // Show FAB for data sections
+            const fabButton = document.getElementById('fabButton');
+            if (fabButton && ['pesticides', 'diseases', 'pests', 'plants', 'prescriptions'].includes(section)) {
+                fabButton.style.display = 'block';
+            }
+            
+            // Update nav
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Hide all pages first
+            const pages = ['pesticidesPage', 'diseasesPage', 'pestsPage', 'plantsPage', 'prescriptionPage', 'prescriptionsPage', 'settingsPage'];
+            pages.forEach(pageId => {
+                const pageElement = document.getElementById(pageId);
+                if (pageElement) {
+                    pageElement.style.display = 'none';
+                }
+            });
+            
+            // Show selected section
+            switch(section) {
+                case 'pesticides':
+                    const pesticidesPage = document.getElementById('pesticidesPage');
+                    if (pesticidesPage) {
+                        pesticidesPage.style.display = 'block';
+                        currentSection = 'pesticides';
+                        displayPesticides();
+                    }
+                    break;
+                case 'diseases':
+                    const diseasesPage = document.getElementById('diseasesPage');
+                    if (diseasesPage) {
+                        diseasesPage.style.display = 'block';
+                        currentSection = 'diseases';
+                        displayDiseases();
+                    }
+                    break;
+                case 'pests':
+                    const pestsPage = document.getElementById('pestsPage');
+                    if (pestsPage) {
+                        pestsPage.style.display = 'block';
+                        currentSection = 'pests';
+                        displayPests();
+                    }
+                    break;
+                case 'plants':
+                    const plantsPage = document.getElementById('plantsPage');
+                    if (plantsPage) {
+                        plantsPage.style.display = 'block';
+                        currentSection = 'plants';
+                        displayPlants();
+                    }
+                    break;
+                case 'prescriptions':
+                    const prescriptionsPage = document.getElementById('prescriptionsPage');
+                    if (prescriptionsPage) {
+                        prescriptionsPage.style.display = 'block';
+                        currentSection = 'prescriptions';
+                        displayPrescriptions();
+                    }
+                    break;
+                case 'prescription':
+                    const prescriptionPage = document.getElementById('prescriptionPage');
+                    if (prescriptionPage) {
+                        prescriptionPage.style.display = 'block';
+                        currentSection = 'prescription';
+                    }
+                    break;
+            }
+        }
+        
+        // Data Management Functions
+        function loadData() {
+            // Load all data from localStorage
+            const pesticides = JSON.parse(localStorage.getItem('pesticides') || '[]');
+            const diseases = JSON.parse(localStorage.getItem('diseases') || '[]');
+            const pests = JSON.parse(localStorage.getItem('pests') || '[]');
+            const plants = JSON.parse(localStorage.getItem('plants') || '[]');
+            const prescriptions = JSON.parse(localStorage.getItem('prescriptions') || '[]');
+            
+            // Store in global variables
+            window.pesticidesData = pesticides;
+            window.diseasesData = diseases;
+            window.pestsData = pests;
+            window.plantsData = plants;
+            window.prescriptionsData = prescriptions;
+        }
+        
+        function saveData(type, data) {
+            localStorage.setItem(type, JSON.stringify(data));
+            loadData();
+            showToast('تم حفظ البيانات بنجاح', 'success');
+        }
+        
+        // Pesticides Functions
+        function displayPesticides() {
+            const container = document.getElementById('pesticidesList');
+            if (!container) return;
+            
+            const data = window.pesticidesData || [];
+            
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-spray-can"></i>
+                        <p>لا توجد مبيدات مسجلة</p>
+                        <p>اضغط على زر + لإضافة مبيد جديد</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = data.map(pesticide => `
+                <div class="data-card">
+                    <div class="actions">
+                        <button onclick="editPesticide(${pesticide.id})" title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="copyPesticide(${pesticide.id})" title="نسخ">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button onclick="deletePesticide(${pesticide.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="type-badge">${pesticide.type}</div>
+                    <h4>${pesticide.name}</h4>
+                    <p><i class="fas fa-flask"></i> المادة الفعالة: ${pesticide.activeIngredient}</p>
+                    <p><i class="fas fa-dollar-sign"></i> السعر: ${pesticide.price} جنيه</p>
+                    <p><i class="fas fa-seedling"></i> المحاصيل: ${pesticide.crops}</p>
+                </div>
+            `).join('');
+        }
+        
+        function searchPesticides() {
+            const searchInput = document.getElementById('pesticideSearch');
+            if (!searchInput) return;
+            
+            const searchTerm = searchInput.value.toLowerCase();
+            const data = window.pesticidesData || [];
+            
+            const filtered = data.filter(pesticide => 
+                pesticide.name.toLowerCase().includes(searchTerm) ||
+                pesticide.activeIngredient.toLowerCase().includes(searchTerm)
+            );
+            
+            const container = document.getElementById('pesticidesList');
+            if (!container) return;
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <p>لا توجد نتائج للبحث</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filtered.map(pesticide => `
+                <div class="data-card">
+                    <div class="actions">
+                        <button onclick="editPesticide(${pesticide.id})" title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="copyPesticide(${pesticide.id})" title="نسخ">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button onclick="deletePesticide(${pesticide.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="type-badge">${pesticide.type}</div>
+                    <h4>${pesticide.name}</h4>
+                    <p><i class="fas fa-flask"></i> المادة الفعالة: ${pesticide.activeIngredient}</p>
+                    <p><i class="fas fa-dollar-sign"></i> السعر: ${pesticide.price} جنيه</p>
+                </div>
+            `).join('');
+        }
+        
+        function showAddPesticideForm() {
+            const form = `
+                <h3><i class="fas fa-spray-can"></i> إضافة مبيد جديد</h3>
+                <form id="pesticideForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> اسم المبيد *</label>
+                        <input type="text" name="name" required pattern="[أ-ي\s0-9]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-bug"></i> يكافح أي آفات أو أمراض *</label>
+                        <input type="text" name="targets" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-list"></i> نوع المبيد *</label>
+                        <select name="type" required>
+                            <option value="">اختر النوع</option>
+                            <option value="حشري">حشري</option>
+                            <option value="فطري">فطري</option>
+                            <option value="أعشاب">أعشاب</option>
+                            <option value="غيره">غيره</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-flask"></i> المادة الفعالة *</label>
+                        <input type="text" name="activeIngredient" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-blender"></i> إمكانية الخلط *</label>
+                        <select name="canMix" required>
+                            <option value="">اختر</option>
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-blender"></i> مع أي مبيدات يخلط (إذا كانت الإجابة نعم)</label>
+                        <input type="text" name="mixWith">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-dollar-sign"></i> السعر *</label>
+                        <input type="number" name="price" required min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-clipboard-list"></i> طريقة الاستعمال *</label>
+                        <textarea name="usage" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-seedling"></i> المحاصيل المستخدمة *</label>
+                        <input type="text" name="crops" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+                        <textarea name="notes"></textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ المبيد
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = form;
+                document.getElementById('formModal').style.display = 'block';
+                
+                const pesticideForm = document.getElementById('pesticideForm');
+                if (pesticideForm) {
+                    pesticideForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        const pesticide = {
+                            id: Date.now(),
+                            name: formData.get('name'),
+                            targets: formData.get('targets'),
+                            type: formData.get('type'),
+                            activeIngredient: formData.get('activeIngredient'),
+                            canMix: formData.get('canMix'),
+                            mixWith: formData.get('mixWith'),
+                            price: formData.get('price'),
+                            usage: formData.get('usage'),
+                            crops: formData.get('crops'),
+                            notes: formData.get('notes')
+                        };
+                        
+                        const data = window.pesticidesData || [];
+                        data.push(pesticide);
+                        saveData('pesticides', data);
+                        closeModal();
+                        displayPesticides();
+                    };
+                }
+            }
+        }
+        
+        function editPesticide(id) {
+            const pesticide = window.pesticidesData.find(p => p.id === id);
+            if (!pesticide) return;
+            
+            const form = `
+                <h3><i class="fas fa-edit"></i> تعديل مبيد</h3>
+                <form id="editPesticideForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> اسم المبيد *</label>
+                        <input type="text" name="name" value="${pesticide.name}" required pattern="[أ-ي\s0-9]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-bug"></i> يكافح أي آفات أو أمراض *</label>
+                        <input type="text" name="targets" value="${pesticide.targets}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-list"></i> نوع المبيد *</label>
+                        <select name="type" required>
+                            <option value="">اختر النوع</option>
+                            <option value="حشري" ${pesticide.type === 'حشري' ? 'selected' : ''}>حشري</option>
+                            <option value="فطري" ${pesticide.type === 'فطري' ? 'selected' : ''}>فطري</option>
+                            <option value="أعشاب" ${pesticide.type === 'أعشاب' ? 'selected' : ''}>أعشاب</option>
+                            <option value="غيره" ${pesticide.type === 'غيره' ? 'selected' : ''}>غيره</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-flask"></i> المادة الفعالة *</label>
+                        <input type="text" name="activeIngredient" value="${pesticide.activeIngredient}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-blender"></i> إمكانية الخلط *</label>
+                        <select name="canMix" required>
+                            <option value="">اختر</option>
+                            <option value="نعم" ${pesticide.canMix === 'نعم' ? 'selected' : ''}>نعم</option>
+                            <option value="لا" ${pesticide.canMix === 'لا' ? 'selected' : ''}>لا</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-blender"></i> مع أي مبيدات يخلط</label>
+                        <input type="text" name="mixWith" value="${pesticide.mixWith || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-dollar-sign"></i> السعر *</label>
+                        <input type="number" name="price" value="${pesticide.price}" required min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-clipboard-list"></i> طريقة الاستعمال *</label>
+                        <textarea name="usage" required minlength="10">${pesticide.usage}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-seedling"></i> المحاصيل المستخدمة *</label>
+                        <input type="text" name="crops" value="${pesticide.crops}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+                        <textarea name="notes">${pesticide.notes || ''}</textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ التعديلات
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = form;
+                document.getElementById('formModal').style.display = 'block';
+                
+                const editPesticideForm = document.getElementById('editPesticideForm');
+                if (editPesticideForm) {
+                    editPesticideForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        const updatedPesticide = {
+                            ...pesticide,
+                            name: formData.get('name'),
+                            targets: formData.get('targets'),
+                            type: formData.get('type'),
+                            activeIngredient: formData.get('activeIngredient'),
+                            canMix: formData.get('canMix'),
+                            mixWith: formData.get('mixWith'),
+                            price: formData.get('price'),
+                            usage: formData.get('usage'),
+                            crops: formData.get('crops'),
+                            notes: formData.get('notes')
+                        };
+                        
+                        const data = window.pesticidesData.map(p => p.id === id ? updatedPesticide : p);
+                        saveData('pesticides', data);
+                        closeModal();
+                        displayPesticides();
+                    };
+                }
+            }
+        }
+        
+        function copyPesticide(id) {
+            const pesticide = window.pesticidesData.find(p => p.id === id);
+            if (!pesticide) return;
+            
+            const text = `
+مبيد: ${pesticide.name}
+النوع: ${pesticide.type}
+المادة الفعالة: ${pesticide.activeIngredient}
+السعر: ${pesticide.price} جنيه
+يكافح: ${pesticide.targets}
+إمكانية الخلط: ${pesticide.canMix}
+${pesticide.mixWith ? `يخلط مع: ${pesticide.mixWith}` : ''}
+طريقة الاستعمال: ${pesticide.usage}
+المحاصيل: ${pesticide.crops}
+${pesticide.notes ? `ملاحظات: ${pesticide.notes}` : ''}
+            `.trim();
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم نسخ المبيد بنجاح', 'success');
+            }).catch(() => {
+                showToast('فشل في نسخ المبيد', 'error');
+            });
+        }
+        
+        function deletePesticide(id) {
+            if (confirm('هل أنت متأكد من حذف هذا المبيد؟')) {
+                const data = window.pesticidesData.filter(p => p.id !== id);
+                saveData('pesticides', data);
+                displayPesticides();
+            }
+        }
+        
+        // Diseases Functions
+        function displayDiseases() {
+            const container = document.getElementById('diseasesList');
+            if (!container) return;
+            
+            const data = window.diseasesData || [];
+            
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-virus"></i>
+                        <p>لا توجد أمراض مسجلة</p>
+                        <p>اضغط على زر + لإضافة مرض جديد</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = data.map(disease => `
+                <div class="data-card">
+                    <div class="actions">
+                        <button onclick="editDisease(${disease.id})" title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="copyDisease(${disease.id})" title="نسخ">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button onclick="deleteDisease(${disease.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="type-badge">${disease.cause}</div>
+                    <h4>${disease.name}</h4>
+                    <p><i class="fas fa-microscope"></i> الاسم العلمي: ${disease.scientificName}</p>
+                    <p><i class="fas fa-users"></i> العائلة: ${disease.family}</p>
+                    <p><i class="fas fa-percentage"></i> نسبة النجاح: ${disease.successRate}%</p>
+                </div>
+            `).join('');
+        }
+        
+        function searchDiseases() {
+            const searchInput = document.getElementById('diseaseSearch');
+            if (!searchInput) return;
+            
+            const searchTerm = searchInput.value.toLowerCase();
+            const data = window.diseasesData || [];
+            
+            const filtered = data.filter(disease => 
+                disease.name.toLowerCase().includes(searchTerm) ||
+                disease.scientificName.toLowerCase().includes(searchTerm)
+            );
+            
+            const container = document.getElementById('diseasesList');
+            if (!container) return;
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <p>لا توجد نتائج للبحث</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filtered.map(disease => `
+                <div class="data-card">
+                    <div class="actions">
+                        <button onclick="editDisease(${disease.id})" title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="copyDisease(${disease.id})" title="نسخ">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button onclick="deleteDisease(${disease.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="type-badge">${disease.cause}</div>
+                    <h4>${disease.name}</h4>
+                    <p><i class="fas fa-microscope"></i> الاسم العلمي: ${disease.scientificName}</p>
+                    <p><i class="fas fa-users"></i> العائلة: ${disease.family}</p>
+                </div>
+            `).join('');
+        }
+        
+        function showAddDiseaseForm() {
+            const form = `
+                <h3><i class="fas fa-virus"></i> إضافة مرض جديد</h3>
+                <form id="diseaseForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> اسم المرض *</label>
+                        <input type="text" name="name" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-microscope"></i> الاسم العلمي *</label>
+                        <input type="text" name="scientificName" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-users"></i> العائلة *</label>
+                        <input type="text" name="family" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-bacterium"></i> المسبب *</label>
+                        <select name="cause" id="diseaseCause" required onchange="toggleOtherCause()">
+                            <option value="">اختر المسبب</option>
+                            <option value="فطري">فطري</option>
+                            <option value="بكتيري">بكتيري</option>
+                            <option value="فيروسي">فيروسي</option>
+                            <option value="أخرى">أخرى</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="otherCauseGroup" style="display: none;">
+                        <label><i class="fas fa-edit"></i> حدد المسبب</label>
+                        <input type="text" name="otherCause" id="otherCauseInput">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-exclamation-triangle"></i> الأعراض *</label>
+                        <textarea name="symptoms" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sync"></i> دورة الحياة *</label>
+                        <textarea name="lifeCycle" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-shield-alt"></i> مكافحة *</label>
+                        <textarea name="control" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-images"></i> الصور</label>
+                        <input type="file" id="diseaseImages" multiple accept="image/*" onchange="previewImages(event, 'diseaseImagePreview')">
+                        <div id="diseaseImagePreview" class="image-preview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-alt"></i> ميعاد الظهور *</label>
+                        <input type="text" name="appearanceTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-check"></i> ميعاد المكافحة *</label>
+                        <input type="text" name="controlTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-percentage"></i> نسبة نجاح المكافحة (%) *</label>
+                        <input type="number" name="successRate" min="0" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+                        <textarea name="notes"></textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ المرض
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = form;
+                document.getElementById('formModal').style.display = 'block';
+                
+                const diseaseForm = document.getElementById('diseaseForm');
+                if (diseaseForm) {
+                    diseaseForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        const cause = formData.get('cause');
+                        const finalCause = cause === 'أخرى' ? formData.get('otherCause') : cause;
+                        
+                        const disease = {
+                            id: Date.now(),
+                            name: formData.get('name'),
+                            scientificName: formData.get('scientificName'),
+                            family: formData.get('family'),
+                            cause: finalCause,
+                            symptoms: formData.get('symptoms'),
+                            lifeCycle: formData.get('lifeCycle'),
+                            control: formData.get('control'),
+                            images: window.currentDiseaseImages || [],
+                            appearanceTime: formData.get('appearanceTime'),
+                            controlTime: formData.get('controlTime'),
+                            successRate: formData.get('successRate'),
+                            notes: formData.get('notes')
+                        };
+                        
+                        const data = window.diseasesData || [];
+                        data.push(disease);
+                        saveData('diseases', data);
+                        window.currentDiseaseImages = [];
+                        closeModal();
+                        displayDiseases();
+                    };
+                }
+            }
+        }
+        
+        function toggleOtherCause() {
+            const causeSelect = document.getElementById('diseaseCause');
+            const otherGroup = document.getElementById('otherCauseGroup');
+            
+            if (causeSelect && otherGroup) {
+                if (causeSelect.value === 'أخرى') {
+                    otherGroup.style.display = 'block';
+                    const otherInput = document.getElementById('otherCauseInput');
+                    if (otherInput) otherInput.required = true;
+                } else {
+                    otherGroup.style.display = 'none';
+                    const otherInput = document.getElementById('otherCauseInput');
+                    if (otherInput) otherInput.required = false;
+                }
+            }
+        }
+        
+        function editDisease(id) {
+            const disease = window.diseasesData.find(d => d.id === id);
+            if (!disease) return;
+            
+            const isOtherCause = !['فطري', 'بكتيري', 'فيروسي'].includes(disease.cause);
+            
+            const form = `
+                <h3><i class="fas fa-edit"></i> تعديل مرض</h3>
+                <form id="editDiseaseForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> اسم المرض *</label>
+                        <input type="text" name="name" value="${disease.name}" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-microscope"></i> الاسم العلمي *</label>
+                        <input type="text" name="scientificName" value="${disease.scientificName}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-users"></i> العائلة *</label>
+                        <input type="text" name="family" value="${disease.family}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-bacterium"></i> المسبب *</label>
+                        <select name="cause" id="editDiseaseCause" required onchange="toggleEditOtherCause()">
+                            <option value="">اختر المسبب</option>
+                            <option value="فطري" ${disease.cause === 'فطري' ? 'selected' : ''}>فطري</option>
+                            <option value="بكتيري" ${disease.cause === 'بكتيري' ? 'selected' : ''}>بكتيري</option>
+                            <option value="فيروسي" ${disease.cause === 'فيروسي' ? 'selected' : ''}>فيروسي</option>
+                            <option value="أخرى" ${isOtherCause ? 'selected' : ''}>أخرى</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="editOtherCauseGroup" style="display: ${isOtherCause ? 'block' : 'none'};">
+                        <label><i class="fas fa-edit"></i> حدد المسبب</label>
+                        <input type="text" name="otherCause" id="editOtherCauseInput" value="${isOtherCause ? disease.cause : ''}">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-exclamation-triangle"></i> الأعراض *</label>
+                        <textarea name="symptoms" required minlength="10">${disease.symptoms}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sync"></i> دورة الحياة *</label>
+                        <textarea name="lifeCycle" required minlength="10">${disease.lifeCycle}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-shield-alt"></i> مكافحة *</label>
+                        <textarea name="control" required minlength="10">${disease.control}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-images"></i> الصور</label>
+                        <input type="file" id="editDiseaseImages" multiple accept="image/*" onchange="previewImages(event, 'editDiseaseImagePreview')">
+                        <div id="editDiseaseImagePreview" class="image-preview">
+                            ${disease.images ? disease.images.map(img => `<img src="${img}" alt="صورة المرض">`).join('') : ''}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-alt"></i> ميعاد الظهور *</label>
+                        <input type="text" name="appearanceTime" value="${disease.appearanceTime}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-check"></i> ميعاد المكافحة *</label>
+                        <input type="text" name="controlTime" value="${disease.controlTime}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-percentage"></i> نسبة نجاح المكافحة (%) *</label>
+                        <input type="number" name="successRate" value="${disease.successRate}" min="0" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+                        <textarea name="notes">${disease.notes || ''}</textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ التعديلات
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = form;
+                document.getElementById('formModal').style.display = 'block';
+                
+                const editDiseaseForm = document.getElementById('editDiseaseForm');
+                if (editDiseaseForm) {
+                    editDiseaseForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        const cause = formData.get('cause');
+                        const finalCause = cause === 'أخرى' ? formData.get('otherCause') : cause;
+                        
+                        const updatedDisease = {
+                            ...disease,
+                            name: formData.get('name'),
+                            scientificName: formData.get('scientificName'),
+                            family: formData.get('family'),
+                            cause: finalCause,
+                            symptoms: formData.get('symptoms'),
+                            lifeCycle: formData.get('lifeCycle'),
+                            control: formData.get('control'),
+                            images: window.currentEditDiseaseImages || disease.images || [],
+                            appearanceTime: formData.get('appearanceTime'),
+                            controlTime: formData.get('controlTime'),
+                            successRate: formData.get('successRate'),
+                            notes: formData.get('notes')
+                        };
+                        
+                        const data = window.diseasesData.map(d => d.id === id ? updatedDisease : d);
+                        saveData('diseases', data);
+                        window.currentEditDiseaseImages = [];
+                        closeModal();
+                        displayDiseases();
+                    };
+                }
+            }
+        }
+        
+        function toggleEditOtherCause() {
+            const causeSelect = document.getElementById('editDiseaseCause');
+            const otherGroup = document.getElementById('editOtherCauseGroup');
+            
+            if (causeSelect && otherGroup) {
+                if (causeSelect.value === 'أخرى') {
+                    otherGroup.style.display = 'block';
+                    const otherInput = document.getElementById('editOtherCauseInput');
+                    if (otherInput) otherInput.required = true;
+                } else {
+                    otherGroup.style.display = 'none';
+                    const otherInput = document.getElementById('editOtherCauseInput');
+                    if (otherInput) otherInput.required = false;
+                }
+            }
+        }
+        
+        function copyDisease(id) {
+            const disease = window.diseasesData.find(d => d.id === id);
+            if (!disease) return;
+            
+            const text = `
+مرض: ${disease.name}
+الاسم العلمي: ${disease.scientificName}
+العائلة: ${disease.family}
+المسبب: ${disease.cause}
+الأعراض: ${disease.symptoms}
+دورة الحياة: ${disease.lifeCycle}
+المكافحة: ${disease.control}
+ميعاد الظهور: ${disease.appearanceTime}
+ميعاد المكافحة: ${disease.controlTime}
+نسبة نجاح المكافحة: ${disease.successRate}%
+${disease.notes ? `ملاحظات: ${disease.notes}` : ''}
+            `.trim();
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم نسخ المرض بنجاح', 'success');
+            }).catch(() => {
+                showToast('فشل في نسخ المرض', 'error');
+            });
+        }
+        
+        function deleteDisease(id) {
+            if (confirm('هل أنت متأكد من حذف هذا المرض؟')) {
+                const data = window.diseasesData.filter(d => d.id !== id);
+                saveData('diseases', data);
+                displayDiseases();
+            }
+        }
+        
+        // Pests Functions
+        function displayPests() {
+            const container = document.getElementById('pestsList');
+            if (!container) return;
+            
+            const data = window.pestsData || [];
+            
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-bug"></i>
+                        <p>لا توجد آفات مسجلة</p>
+                        <p>اضغط على زر + لإضافة آفة جديدة</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = data.map(pest => `
+                <div class="data-card">
+                    <div class="actions">
+                        <button onclick="editPest(${pest.id})" title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="copyPest(${pest.id})" title="نسخ">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button onclick="deletePest(${pest.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="type-badge">${pest.family}</div>
+                    <h4>${pest.name}</h4>
+                    <p><i class="fas fa-microscope"></i> الاسم العلمي: ${pest.scientificName}</p>
+                    <p><i class="fas fa-percentage"></i> نسبة النجاح: ${pest.successRate}%</p>
+                </div>
+            `).join('');
+        }
+        
+        function searchPests() {
+            const searchInput = document.getElementById('pestSearch');
+            if (!searchInput) return;
+            
+            const searchTerm = searchInput.value.toLowerCase();
+            const data = window.pestsData || [];
+            
+            const filtered = data.filter(pest => 
+                pest.name.toLowerCase().includes(searchTerm) ||
+                pest.scientificName.toLowerCase().includes(searchTerm)
+            );
+            
+            const container = document.getElementById('pestsList');
+            if (!container) return;
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <p>لا توجد نتائج للبحث</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filtered.map(pest => `
+                <div class="data-card">
+                    <div class="actions">
+                        <button onclick="editPest(${pest.id})" title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="copyPest(${pest.id})" title="نسخ">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button onclick="deletePest(${pest.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <div class="type-badge">${pest.family}</div>
+                    <h4>${pest.name}</h4>
+                    <p><i class="fas fa-microscope"></i> الاسم العلمي: ${pest.scientificName}</p>
+                </div>
+            `).join('');
+        }
+        
+        function showAddPestForm() {
+            const form = `
+                <h3><i class="fas fa-bug"></i> إضافة آفة جديدة</h3>
+                <form id="pestForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> اسم الآفة *</label>
+                        <input type="text" name="name" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-microscope"></i> الاسم العلمي *</label>
+                        <input type="text" name="scientificName" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-users"></i> العائلة *</label>
+                        <input type="text" name="family" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-exclamation-triangle"></i> الأعراض *</label>
+                        <textarea name="symptoms" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sync"></i> دورة الحياة *</label>
+                        <textarea name="lifeCycle" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-shield-alt"></i> مكافحة *</label>
+                        <textarea name="control" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-images"></i> الصور</label>
+                        <input type="file" id="pestImages" multiple accept="image/*" onchange="previewImages(event, 'pestImagePreview')">
+                        <div id="pestImagePreview" class="image-preview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-alt"></i> ميعاد الظهور *</label>
+                        <input type="text" name="appearanceTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-check"></i> ميعاد المكافحة *</label>
+                        <input type="text" name="controlTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-percentage"></i> نسبة نجاح المكافحة (%) *</label>
+                        <input type="number" name="successRate" min="0" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+                        <textarea name="notes"></textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ الآفة
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = form;
+                document.getElementById('formModal').style.display = 'block';
+                
+                const pestForm = document.getElementById('pestForm');
+                if (pestForm) {
+                    pestForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        const pest = {
+                            id: Date.now(),
+                            name: formData.get('name'),
+                            scientificName: formData.get('scientificName'),
+                            family: formData.get('family'),
+                            symptoms: formData.get('symptoms'),
+                            lifeCycle: formData.get('lifeCycle'),
+                            control: formData.get('control'),
+                            images: window.currentPestImages || [],
+                            appearanceTime: formData.get('appearanceTime'),
+                            controlTime: formData.get('controlTime'),
+                            successRate: formData.get('successRate'),
+                            notes: formData.get('notes')
+                        };
+                        
+                        const data = window.pestsData || [];
+                        data.push(pest);
+                        saveData('pests', data);
+                        window.currentPestImages = [];
+                        closeModal();
+                        displayPests();
+                    };
+                }
+            }
+        }
+        
+        function editPest(id) {
+            const pest = window.pestsData.find(p => p.id === id);
+            if (!pest) return;
+            
+            const form = `
+                <h3><i class="fas fa-edit"></i> تعديل آفة</h3>
+                <form id="editPestForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> اسم الآفة *</label>
+                        <input type="text" name="name" value="${pest.name}" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-microscope"></i> الاسم العلمي *</label>
+                        <input type="text" name="scientificName" value="${pest.scientificName}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-users"></i> العائلة *</label>
+                        <input type="text" name="family" value="${pest.family}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-exclamation-triangle"></i> الأعراض *</label>
+                        <textarea name="symptoms" required minlength="10">${pest.symptoms}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sync"></i> دورة الحياة *</label>
+                        <textarea name="lifeCycle" required minlength="10">${pest.lifeCycle}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-shield-alt"></i> مكافحة *</label>
+                        <textarea name="control" required minlength="10">${pest.control}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-images"></i> الصور</label>
+                        <input type="file" id="editPestImages" multiple accept="image/*" onchange="previewImages(event, 'editPestImagePreview')">
+                        <div id="editPestImagePreview" class="image-preview">
+                            ${pest.images ? pest.images.map(img => `<img src="${img}" alt="صورة الآفة">`).join('') : ''}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-alt"></i> ميعاد الظهور *</label>
+                        <input type="text" name="appearanceTime" value="${pest.appearanceTime}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-check"></i> ميعاد المكافحة *</label>
+                        <input type="text" name="controlTime" value="${pest.controlTime}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-percentage"></i> نسبة نجاح المكافحة (%) *</label>
+                        <input type="number" name="successRate" value="${pest.successRate}" min="0" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+                        <textarea name="notes">${pest.notes || ''}</textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ التعديلات
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = form;
+                document.getElementById('formModal').style.display = 'block';
+                
+                const editPestForm = document.getElementById('editPestForm');
+                if (editPestForm) {
+                    editPestForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        const updatedPest = {
+                            ...pest,
+                            name: formData.get('name'),
+                            scientificName: formData.get('scientificName'),
+                            family: formData.get('family'),
+                            symptoms: formData.get('symptoms'),
+                            lifeCycle: formData.get('lifeCycle'),
+                            control: formData.get('control'),
+                            images: window.currentEditPestImages || pest.images || [],
+                            appearanceTime: formData.get('appearanceTime'),
+                            controlTime: formData.get('controlTime'),
+                            successRate: formData.get('successRate'),
+                            notes: formData.get('notes')
+                        };
+                        
+                        const data = window.pestsData.map(p => p.id === id ? updatedPest : p);
+                        saveData('pests', data);
+                        window.currentEditPestImages = [];
+                        closeModal();
+                        displayPests();
+                    };
+                }
+            }
+        }
+        
+        function copyPest(id) {
+            const pest = window.pestsData.find(p => p.id === id);
+            if (!pest) return;
+            
+            const text = `
+آفة: ${pest.name}
+الاسم العلمي: ${pest.scientificName}
+العائلة: ${pest.family}
+الأعراض: ${pest.symptoms}
+دورة الحياة: ${pest.lifeCycle}
+المكافحة: ${pest.control}
+ميعاد الظهور: ${pest.appearanceTime}
+ميعاد المكافحة: ${pest.controlTime}
+نسبة نجاح المكافحة: ${pest.successRate}%
+${pest.notes ? `ملاحظات: ${pest.notes}` : ''}
+            `.trim();
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم نسخ الآفة بنجاح', 'success');
+            }).catch(() => {
+                showToast('فشل في نسخ الآفة', 'error');
+            });
+        }
+        
+        function deletePest(id) {
+            if (confirm('هل أنت متأكد من حذف هذه الآفة؟')) {
+                const data = window.pestsData.filter(p => p.id !== id);
+                saveData('pests', data);
+                displayPests();
+            }
+        }
+        
+        // Plants Functions
+        function displayPlants() {
+            const container = document.getElementById('plantsList');
+            if (!container) return;
+            
+            const data = window.plantsData || [];
+            
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-leaf"></i>
+                        <p>لا توجد نباتات مسجلة</p>
+                        <p>اضغط على زر + لإضافة نبات جديد</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = data.map(plant => `
+                <div class="data-card">
+                    <div class="actions">
+                        <button onclick="editPlant(${plant.id})" title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="copyPlant(${plant.id})" title="نسخ">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button onclick="deletePlant(${plant.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <h4>${plant.name}</h4>
+                    <p><i class="fas fa-tag"></i> الصنف: ${plant.variety}</p>
+                    <p><i class="fas fa-calendar"></i> الزراعة: ${plant.plantingTime}</p>
+                    <p><i class="fas fa-calendar-check"></i> الحصاد: ${plant.harvestTime}</p>
+                </div>
+            `).join('');
+        }
+        
+        function searchPlants() {
+            const searchInput = document.getElementById('plantSearch');
+            if (!searchInput) return;
+            
+            const searchTerm = searchInput.value.toLowerCase();
+            const data = window.plantsData || [];
+            
+            const filtered = data.filter(plant => 
+                plant.name.toLowerCase().includes(searchTerm) ||
+                plant.variety.toLowerCase().includes(searchTerm)
+            );
+            
+            const container = document.getElementById('plantsList');
+            if (!container) return;
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <p>لا توجد نتائج للبحث</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filtered.map(plant => `
+                <div class="data-card">
+                    <div class="actions">
+                        <button onclick="editPlant(${plant.id})" title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="copyPlant(${plant.id})" title="نسخ">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button onclick="deletePlant(${plant.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <h4>${plant.name}</h4>
+                    <p><i class="fas fa-tag"></i> الصنف: ${plant.variety}</p>
+                    <p><i class="fas fa-calendar"></i> الزراعة: ${plant.plantingTime}</p>
+                </div>
+            `).join('');
+        }
+        
+        function showAddPlantForm() {
+            const form = `
+                <h3><i class="fas fa-leaf"></i> إضافة نبات جديد</h3>
+                <form id="plantForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> اسم النبات *</label>
+                        <input type="text" name="name" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-tags"></i> الصنف *</label>
+                        <input type="text" name="variety" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar"></i> ميعاد الزراعة *</label>
+                        <input type="text" name="plantingTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-check"></i> ميعاد الحصاد *</label>
+                        <input type="text" name="harvestTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-virus"></i> أهم الأمراض والآفات *</label>
+                        <textarea name="diseasesPests" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-spray-can"></i> أهم المبيدات *</label>
+                        <textarea name="pesticides" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-flask"></i> برنامج التسميد *</label>
+                        <textarea name="fertilization" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-tint"></i> مواعيد الري *</label>
+                        <textarea name="irrigation" required minlength="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-images"></i> الصور</label>
+                        <input type="file" id="plantImages" multiple accept="image/*" onchange="previewImages(event, 'plantImagePreview')">
+                        <div id="plantImagePreview" class="image-preview"></div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+                        <textarea name="notes"></textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ النبات
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = form;
+                document.getElementById('formModal').style.display = 'block';
+                
+                const plantForm = document.getElementById('plantForm');
+                if (plantForm) {
+                    plantForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        const plant = {
+                            id: Date.now(),
+                            name: formData.get('name'),
+                            variety: formData.get('variety'),
+                            plantingTime: formData.get('plantingTime'),
+                            harvestTime: formData.get('harvestTime'),
+                            diseasesPests: formData.get('diseasesPests'),
+                            pesticides: formData.get('pesticides'),
+                            fertilization: formData.get('fertilization'),
+                            irrigation: formData.get('irrigation'),
+                            images: window.currentPlantImages || [],
+                            notes: formData.get('notes')
+                        };
+                        
+                        const data = window.plantsData || [];
+                        data.push(plant);
+                        saveData('plants', data);
+                        window.currentPlantImages = [];
+                        closeModal();
+                        displayPlants();
+                    };
+                }
+            }
+        }
+        
+        function editPlant(id) {
+            const plant = window.plantsData.find(p => p.id === id);
+            if (!plant) return;
+            
+            const form = `
+                <h3><i class="fas fa-edit"></i> تعديل نبات</h3>
+                <form id="editPlantForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> اسم النبات *</label>
+                        <input type="text" name="name" value="${plant.name}" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-tags"></i> الصنف *</label>
+                        <input type="text" name="variety" value="${plant.variety}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar"></i> ميعاد الزراعة *</label>
+                        <input type="text" name="plantingTime" value="${plant.plantingTime}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar-check"></i> ميعاد الحصاد *</label>
+                        <input type="text" name="harvestTime" value="${plant.harvestTime}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-virus"></i> أهم الأمراض والآفات *</label>
+                        <textarea name="diseasesPests" required minlength="10">${plant.diseasesPests}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-spray-can"></i> أهم المبيدات *</label>
+                        <textarea name="pesticides" required minlength="10">${plant.pesticides}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-flask"></i> برنامج التسميد *</label>
+                        <textarea name="fertilization" required minlength="10">${plant.fertilization}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-tint"></i> مواعيد الري *</label>
+                        <textarea name="irrigation" required minlength="10">${plant.irrigation}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-images"></i> الصور</label>
+                        <input type="file" id="editPlantImages" multiple accept="image/*" onchange="previewImages(event, 'editPlantImagePreview')">
+                        <div id="editPlantImagePreview" class="image-preview">
+                            ${plant.images ? plant.images.map(img => `<img src="${img}" alt="صورة النبات">`).join('') : ''}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-sticky-note"></i> ملاحظات</label>
+                        <textarea name="notes">${plant.notes || ''}</textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ التعديلات
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = form;
+                document.getElementById('formModal').style.display = 'block';
+                
+                const editPlantForm = document.getElementById('editPlantForm');
+                if (editPlantForm) {
+                    editPlantForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        const updatedPlant = {
+                            ...plant,
+                            name: formData.get('name'),
+                            variety: formData.get('variety'),
+                            plantingTime: formData.get('plantingTime'),
+                            harvestTime: formData.get('harvestTime'),
+                            diseasesPests: formData.get('diseasesPests'),
+                            pesticides: formData.get('pesticides'),
+                            fertilization: formData.get('fertilization'),
+                            irrigation: formData.get('irrigation'),
+                            images: window.currentEditPlantImages || plant.images || [],
+                            notes: formData.get('notes')
+                        };
+                        
+                        const data = window.plantsData.map(p => p.id === id ? updatedPlant : p);
+                        saveData('plants', data);
+                        window.currentEditPlantImages = [];
+                        closeModal();
+                        displayPlants();
+                    };
+                }
+            }
+        }
+        
+        function copyPlant(id) {
+            const plant = window.plantsData.find(p => p.id === id);
+            if (!plant) return;
+            
+            const text = `
+نبات: ${plant.name}
+الصنف: ${plant.variety}
+ميعاد الزراعة: ${plant.plantingTime}
+ميعاد الحصاد: ${plant.harvestTime}
+أهم الأمراض والآفات: ${plant.diseasesPests}
+أهم المبيدات: ${plant.pesticides}
+برنامج التسميد: ${plant.fertilization}
+مواعيد الري: ${plant.irrigation}
+${plant.notes ? `ملاحظات: ${plant.notes}` : ''}
+            `.trim();
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم نسخ النبات بنجاح', 'success');
+            }).catch(() => {
+                showToast('فشل في نسخ النبات', 'error');
+            });
+        }
+        
+        function deletePlant(id) {
+            if (confirm('هل أنت متأكد من حذف هذا النبات؟')) {
+                const data = window.plantsData.filter(p => p.id !== id);
+                saveData('plants', data);
+                displayPlants();
+            }
+        }
+        
+        // Prescriptions Functions
+        function displayPrescriptions() {
+            const container = document.getElementById('prescriptionsList');
+            if (!container) return;
+            
+            const data = window.prescriptionsData || [];
+            
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-file-prescription"></i>
+                        <p>لا توجد روشتات مسجلة</p>
+                        <p>اضغط على زر + لإضافة روشتة جديدة</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = data.map(prescription => `
+                <div class="prescription-item">
+                    <div class="actions">
+                        <button onclick="editPrescription(${prescription.id})" title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="copyPrescriptionData(${prescription.id})" title="نسخ">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button onclick="deletePrescription(${prescription.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <h4>${prescription.clientName}</h4>
+                    <div class="prescription-meta">
+                        <span><i class="fas fa-user-tie"></i> ${prescription.engineerName}</span>
+                        <span><i class="fas fa-calendar"></i> ${new Date(prescription.prescriptionDate).toLocaleDateString('ar-EG')}</span>
+                        <span><i class="fas fa-dollar-sign"></i> ${prescription.consultationPrice} جنيه</span>
+                    </div>
+                    <div class="prescription-content">${prescription.content}</div>
+                </div>
+            `).join('');
+        }
+        
+        function searchPrescriptions() {
+            const searchInput = document.getElementById('prescriptionSearch');
+            if (!searchInput) return;
+            
+            const searchTerm = searchInput.value.toLowerCase();
+            const data = window.prescriptionsData || [];
+            
+            const filtered = data.filter(prescription => 
+                prescription.clientName.toLowerCase().includes(searchTerm) ||
+                prescription.engineerName.toLowerCase().includes(searchTerm)
+            );
+            
+            const container = document.getElementById('prescriptionsList');
+            if (!container) return;
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <p>لا توجد نتائج للبحث</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filtered.map(prescription => `
+                <div class="prescription-item">
+                    <div class="actions">
+                        <button onclick="editPrescription(${prescription.id})" title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button onclick="copyPrescriptionData(${prescription.id})" title="نسخ">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button onclick="deletePrescription(${prescription.id})" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                    <h4>${prescription.clientName}</h4>
+                    <div class="prescription-meta">
+                        <span><i class="fas fa-user-tie"></i> ${prescription.engineerName}</span>
+                        <span><i class="fas fa-calendar"></i> ${new Date(prescription.prescriptionDate).toLocaleDateString('ar-EG')}</span>
+                    </div>
+                    <div class="prescription-content">${prescription.content}</div>
+                </div>
+            `).join('');
+        }
+        
+        function editPrescription(id) {
+            const prescription = window.prescriptionsData.find(p => p.id === id);
+            if (!prescription) return;
+            
+            const form = `
+                <h3><i class="fas fa-edit"></i> تعديل روشتة</h3>
+                <form id="editPrescriptionForm">
+                    <div class="form-group">
+                        <label><i class="fas fa-user-tie"></i> اسم المهندس *</label>
+                        <input type="text" name="engineerName" value="${prescription.engineerName}" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> رقم واتساب المهندس *</label>
+                        <input type="tel" name="engineerPhone" value="${prescription.engineerPhone}" required pattern="[0-9]{11}" title="الرجاء إدخال رقم هاتف صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> اسم العميل *</label>
+                        <input type="text" name="clientName" value="${prescription.clientName}" required pattern="[أ-ي\s]+" title="الرجاء إدخال اسم صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone-alt"></i> رقم العميل *</label>
+                        <input type="tel" name="clientPhone" value="${prescription.clientPhone}" required pattern="[0-9]{11}" title="الرجاء إدخال رقم هاتف صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-dollar-sign"></i> سعر الاستشارة *</label>
+                        <input type="number" name="consultationPrice" value="${prescription.consultationPrice}" required min="0" step="0.01" title="الرجاء إدخال سعر صحيح">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-calendar"></i> التاريخ والوقت *</label>
+                        <input type="datetime-local" name="prescriptionDate" value="${prescription.prescriptionDate}" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-file-alt"></i> محتوى الروشتة *</label>
+                        <textarea name="content" rows="10" required minlength="10" title="الرجاء إدخال محتوى الروشتة">${prescription.content}</textarea>
+                    </div>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ التعديلات
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">
+                            <i class="fas fa-times"></i> إلغاء
+                        </button>
+                    </div>
+                </form>
+            `;
+            
+            const modalContent = document.getElementById('modalContent');
+            if (modalContent) {
+                modalContent.innerHTML = form;
+                document.getElementById('formModal').style.display = 'block';
+                
+                const editPrescriptionForm = document.getElementById('editPrescriptionForm');
+                if (editPrescriptionForm) {
+                    editPrescriptionForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        const updatedPrescription = {
+                            ...prescription,
+                            engineerName: formData.get('engineerName'),
+                            engineerPhone: formData.get('engineerPhone'),
+                            clientName: formData.get('clientName'),
+                            clientPhone: formData.get('clientPhone'),
+                            consultationPrice: formData.get('consultationPrice'),
+                            prescriptionDate: formData.get('prescriptionDate'),
+                            content: formData.get('content')
+                        };
+                        
+                        const data = window.prescriptionsData.map(p => p.id === id ? updatedPrescription : p);
+                        saveData('prescriptions', data);
+                        closeModal();
+                        displayPrescriptions();
+                    };
+                }
+            }
+        }
+        
+        function copyPrescriptionData(id) {
+            const prescription = window.prescriptionsData.find(p => p.id === id);
+            if (!prescription) return;
+            
+            const text = `
+روشتة زراعية
+
+المهندس: ${prescription.engineerName}
+العميل: ${prescription.clientName}
+التاريخ: ${new Date(prescription.prescriptionDate).toLocaleString('ar-EG')}
+سعر الاستشارة: ${prescription.consultationPrice} جنيه
+
+محتوى الروشتة:
+${prescription.content}
+            `.trim();
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم نسخ الروشتة بنجاح', 'success');
+            }).catch(() => {
+                showToast('فشل في نسخ الروشتة', 'error');
+            });
+        }
+        
+        function deletePrescription(id) {
+            if (confirm('هل أنت متأكد من حذف هذه الروشتة؟')) {
+                const data = window.prescriptionsData.filter(p => p.id !== id);
+                saveData('prescriptions', data);
+                displayPrescriptions();
+            }
+        }
+        
+        function setupFormHandlers() {
+            const prescriptionForm = document.getElementById('prescriptionForm');
+            if (prescriptionForm) {
+                prescriptionForm.onsubmit = function(e) {
+                    e.preventDefault();
+                    
+                    const prescription = {
+                        id: Date.now(),
+                        engineerName: document.getElementById('engineerName').value,
+                        engineerPhone: document.getElementById('engineerPhone').value,
+                        clientName: document.getElementById('clientName').value,
+                        clientPhone: document.getElementById('clientPhone').value,
+                        consultationPrice: document.getElementById('consultationPrice').value,
+                        prescriptionDate: document.getElementById('prescriptionDate').value,
+                        content: document.getElementById('prescriptionContent').value
+                    };
+                    
+                    const data = window.prescriptionsData || [];
+                    data.push(prescription);
+                    saveData('prescriptions', data);
+                    
+                    // Reset form
+                    this.reset();
+                    const prescriptionDate = document.getElementById('prescriptionDate');
+                    if (prescriptionDate) {
+                        prescriptionDate.value = new Date().toISOString().slice(0, 16);
+                    }
+                    
+                    showToast('تم حفظ الروشتة بنجاح', 'success');
+                };
+            }
+        }
+        
+        function copyPrescription() {
+            const engineerName = document.getElementById('engineerName').value;
+            const clientName = document.getElementById('clientName').value;
+            const price = document.getElementById('consultationPrice').value;
+            const date = new Date(document.getElementById('prescriptionDate').value).toLocaleString('ar-EG');
+            const content = document.getElementById('prescriptionContent').value;
+            
+            const prescriptionText = `
+روشتة زراعية
+
+المهندس: ${engineerName}
+العميل: ${clientName}
+التاريخ: ${date}
+سعر الاستشارة: ${price} جنيه
+
+محتوى الروشتة:
+${content}
+            `.trim();
+            
+            navigator.clipboard.writeText(prescriptionText).then(() => {
+                showToast('تم نسخ الروشتة إلى الحافظة', 'success');
+            }).catch(() => {
+                showToast('فشل في نسخ الروشتة', 'error');
+            });
+        }
+        
+        function sendWhatsApp() {
+            const clientPhone = document.getElementById('clientPhone').value;
+            const engineerName = document.getElementById('engineerName').value;
+            const clientName = document.getElementById('clientName').value;
+            const price = document.getElementById('consultationPrice').value;
+            const date = new Date(document.getElementById('prescriptionDate').value).toLocaleString('ar-EG');
+            const content = document.getElementById('prescriptionContent').value;
+            
+            const message = `
+روشتة زراعية
+
+المهندس: ${engineerName}
+العميل: ${clientName}
+التاريخ: ${date}
+سعر الاستشارة: ${price} جنيه
+
+محتوى الروشتة:
+${content}
+            `.trim();
+            
+            const whatsappUrl = `https://wa.me/${clientPhone}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        // Modal Functions
+        function closeModal() {
+            const formModal = document.getElementById('formModal');
+            if (formModal) formModal.style.display = 'none';
+            
+            // Clear image previews
+            const previews = document.querySelectorAll('.image-preview');
+            previews.forEach(preview => {
+                preview.innerHTML = '';
+            });
+            
+            // Clear current images
+            window.currentDiseaseImages = [];
+            window.currentPestImages = [];
+            window.currentPlantImages = [];
+            window.currentEditDiseaseImages = [];
+            window.currentEditPestImages = [];
+            window.currentEditPlantImages = [];
+        }
+        
+        function showAddForm() {
+            switch(currentSection) {
+                case 'pesticides':
+                    showAddPesticideForm();
+                    break;
+                case 'diseases':
+                    showAddDiseaseForm();
+                    break;
+                case 'pests':
+                    showAddPestForm();
+                    break;
+                case 'plants':
+                    showAddPlantForm();
+                    break;
+                case 'prescriptions':
+                    showSection('prescription');
+                    break;
+            }
+        }
+        
+        // Image Preview Functions
+        function previewImages(event, previewId) {
+            const files = event.target.files;
+            const preview = document.getElementById(previewId);
+            if (!preview) return;
+            
+            preview.innerHTML = '';
+            
+            const imagesArray = [];
+            
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    preview.appendChild(img);
+                    imagesArray.push(e.target.result);
+                    
+                    // Store images based on current section
+                    if (previewId === 'diseaseImagePreview') {
+                        window.currentDiseaseImages = imagesArray;
+                    } else if (previewId === 'pestImagePreview') {
+                        window.currentPestImages = imagesArray;
+                    } else if (previewId === 'plantImagePreview') {
+                        window.currentPlantImages = imagesArray;
+                    } else if (previewId === 'editDiseaseImagePreview') {
+                        window.currentEditDiseaseImages = imagesArray;
+                    } else if (previewId === 'editPestImagePreview') {
+                        window.currentEditPestImages = imagesArray;
+                    } else if (previewId === 'editPlantImagePreview') {
+                        window.currentEditPlantImages = imagesArray;
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        // Settings Functions
+        function changeLanguage(lang) {
+            if (lang === 'en') {
+                showToast('Language change feature coming soon!', 'info');
+            }
+        }
+        
+        function backupData() {
+            const data = {
+                userName: localStorage.getItem('userName'),
+                pesticides: window.pesticidesData || [],
+                diseases: window.diseasesData || [],
+                pests: window.pestsData || [],
+                plants: window.plantsData || [],
+                prescriptions: window.prescriptionsData || []
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `agriculture_backup_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            showToast('تم تحميل النسخة الاحتياطية بنجاح', 'success');
+        }
+        
+        function restoreData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    // Restore user name
+                    if (data.userName) {
+                        localStorage.setItem('userName', data.userName);
+                        showWelcomeMessage(data.userName);
+                    }
+                    
+                    // Save all data
+                    if (data.pesticides) saveData('pesticides', data.pesticides);
+                    if (data.diseases) saveData('diseases', data.diseases);
+                    if (data.pests) saveData('pests', data.pests);
+                    if (data.plants) saveData('plants', data.plants);
+                    if (data.prescriptions) saveData('prescriptions', data.prescriptions);
+                    
+                    showToast('تم استعادة البيانات بنجاح', 'success');
+                    
+                    // Refresh current view
+                    if (currentSection === 'pesticides') displayPesticides();
+                    else if (currentSection === 'diseases') displayDiseases();
+                    else if (currentSection === 'pests') displayPests();
+                    else if (currentSection === 'plants') displayPlants();
+                    else if (currentSection === 'prescriptions') displayPrescriptions();
+                    
+                } catch (error) {
+                    showToast('خطأ في استعادة البيانات', 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function clearAllData() {
+            if (confirm('هل أنت متأكد من مسح جميع البيانات؟ هذا الإجراء لا يمكن التراجع عنه.')) {
+                localStorage.clear();
+                loadData();
+                showToast('تم مسح جميع البيانات', 'success');
+                
+                // Show user registration again
+                showUserRegistration();
+                
+                // Refresh current view
+                if (currentSection === 'pesticides') displayPesticides();
+                else if (currentSection === 'diseases') displayDiseases();
+                else if (currentSection === 'pests') displayPests();
+                else if (currentSection === 'plants') displayPlants();
+                else if (currentSection === 'prescriptions') displayPrescriptions();
+            }
+        }
+        
+        // Toast Notification Function
+        function showToast(message, type = 'info') {
+            const bgColor = type === 'success' ? '#4caf50' : type === 'error' ? '#f44336' : '#2196f3';
+            
+            Toastify({
+                text: message,
+                duration: 3000,
+                gravity: "top",
+                position: "center",
+                style: {
+                    background: bgColor,
+                    borderRadius: "8px",
+                    fontFamily: "'Cairo', sans-serif"
+                }
+            }).showToast();
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const formModal = document.getElementById('formModal');
+            const userModal = document.getElementById('userRegistrationModal');
+            
+            if (event.target === formModal) {
+                closeModal();
+            } else if (event.target === userModal) {
+                // Don't close user registration modal
+            }
+        }
+    </script>
+</body>
+</html>
